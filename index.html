@@ -99,40 +99,39 @@
             }
 
             if(window.l1.value == '') {
-                l1Val = "^(.*)"
+                l1Val = "[A-Za-z_ğüşıöçĞÜŞİÖÇ]"
             } else {
-                l1Val = '^'+window.l1.value;
+                l1Val = window.l1.value;
             }
 
             if(window.l2.value == '') {
-                l2Val = "(.*)"
+                l2Val = "[A-Za-z_ğüşıöçĞÜŞİÖÇ]"
             } else {
                 l2Val = window.l2.value;
             }
 
             if(window.l3.value == '') {
-                l3Val = "(.*)"
+                l3Val = "[A-Za-z_ğüşıöçĞÜŞİÖÇ]"
             } else {
                 l3Val = window.l3.value;
             }
 
             if(window.l4.value == '') {
-                l4Val = "(.*)"
+                l4Val = "[A-Za-z_ğüşıöçĞÜŞİÖÇ]"
             } else {
                 l4Val = window.l4.value;
             }
 
             if(window.l5.value == '') {
-                l5Val = "(.*)$"
+                l5Val = "[A-Za-z_ğüşıöçĞÜŞİÖÇ]"
             } else {
-                l5Val = window.l5.value+'$';
+                l5Val = window.l5.value;
             }
 
             let combined = (l1Val + l2Val + l3Val + l4Val + l5Val).turkishToUpper();
             var re = new RegExp(combined, "i");
-            console.log(re);
 
-            if(re == "/^(.*)(.*)(.*)(.*)(.*)$/i") {
+            if(re == "/[A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ]/i") {
                 var results = ''; 
             } else {
                 const matches = words.filter(value => re.test(value));
