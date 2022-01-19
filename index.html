@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Wordle TR Helper</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+            max-width: 600px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .letter {
+            width: 30px;
+            height: 40px;
+            font-size: 35px;
+            line-height: 35px;
+            margin: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            outline: none;
+        }
+
+        #suggestions {
+            padding: 27px;
+            line-height: 27px;
+            max-width: 600px;
+
+        }
+
+        @media only screen and (min-width: 992px) {
+            .letter {
+                width: 60px;
+                height: 90px;
+                font-size: 60px;
+                line-height: 60px;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wordle TR Helper</h1>
+    </div>
+
+    <div class="container">
+        <input class="letter" id="l1" name="l1" type="text" maxlength="1">
+        <input class="letter" id="l2" name="l2" type="text" maxlength="1">
+        <input class="letter" id="l3" name="l3" type="text" maxlength="1">
+        <input class="letter" id="l4" name="l4" type="text" maxlength="1">
+        <input class="letter" id="l5" name="l5" type="text" maxlength="1">
+    </div>
+
+    <div class="container">
+        <p id="suggestions"></p>
+    </div>
+
+    <script src="./words.js"></script>
+    <script> 
+        String.prototype.turkishToUpper = function(){
+            var string = this;
+            var letters = { "i": "İ", "ş": "Ş", "ğ": "Ğ", "ü": "Ü", "ö": "Ö", "ç": "Ç", "ı": "I" };
+            string = string.replace(/(([iışğüçö]))/g, function(letter){ return letters[letter]; })
+            return string.toUpperCase();
+        }
+
+        function search(event) {
+            current = this;
+            if (current.getAttribute && current.value.length==current.getAttribute("maxlength") && current.nextElementSibling) {
+                current.nextElementSibling.focus();
+            }
+
+            if(event.keyCode == 8 && current.previousElementSibling) {
+                current.previousElementSibling.focus();
+            }
+
+            if(window.l1.value == '') {
+                l1Val = "[A-Z]"
+            } else {
+                l1Val = window.l1.value;
+            }
+
+            if(window.l2.value == '') {
+                l2Val = "[A-Z]"
+            } else {
+                l2Val = window.l2.value;
+            }
+
+            if(window.l3.value == '') {
+                l3Val = "[A-Z]"
+            } else {
+                l3Val = window.l3.value;
+            }
+
+            if(window.l4.value == '') {
+                l4Val = "[A-Z]"
+            } else {
+                l4Val = window.l4.value;
+            }
+
+            if(window.l5.value == '') {
+                l5Val = "[A-Z]"
+            } else {
+                l5Val = window.l5.value;
+            }
+
+            let combined = l1Val + l2Val + l3Val + l4Val + l5Val;
+            let combinedTR = combined.turkishToUpper();
+            var re = new RegExp(combinedTR, "i");
+
+            if(re == "/[A-Z][A-Z][A-Z][A-Z][A-Z]/g") {
+                var results = ''; 
+            } else {
+                const matches = words.filter(value => re.test(value));
+                var results = matches.join(', ');
+            }
+
+            document.getElementById('suggestions').innerHTML = results;
+        }
+
+        window.l1 = document.getElementById("l1");
+        window.l2 = document.getElementById("l2");
+        window.l3 = document.getElementById("l3");
+        window.l4 = document.getElementById("l4");
+        window.l5 = document.getElementById("l5");
+
+        l1.addEventListener('keyup', search, false);
+        l2.addEventListener('keyup', search, false);
+        l3.addEventListener('keyup', search, false);
+        l4.addEventListener('keyup', search, false);
+        l5.addEventListener('keyup', search, false);
+    </script>
+</body>
+</html>
