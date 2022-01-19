@@ -11,14 +11,22 @@
             padding: 0;
             height: 100%;
             font-family: sans-serif;
+            background-color: #EEEEEE;
         }
 
         h1 {
             font-size: 22px;
+            color: #333;
         }
 
         nav a {
             margin-left: 10px;
+            color: #333;
+        }
+
+        .dark-mode-btn {
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .container {
@@ -39,16 +47,20 @@
             text-align: center;
             text-transform: uppercase;
             outline: none;
+            border: 2px solid #3a3a3c;
+            background-color: #EEEEEE;
+            color: #333;
         }
 
         #suggestions {
             line-height: 27px;
             max-width: 600px;
+            color: #333;
         }
 
         @media only screen and (min-width: 992px) {
             .letter {
-                width: 60px;
+                width: 90px;
                 height: 90px;
                 font-size: 60px;
                 line-height: 60px;
@@ -63,6 +75,7 @@
         <nav>
             <a href="https://f.github.io/wordle-tr/?utm_source=wordle-tr-helper" target="_blank">Wordle TR</a>
             <a href="https://github.com/asilbalaban/wordle-tr-helper" target="_blank">Github</a>
+            <a class="dark-mode-btn" onclick="switchTheme()">Dark Mode</a>
         </nav>
     </header>
 
@@ -86,7 +99,7 @@
             string = string.replace(/(([iışğüçö]))/g, function(letter){ return letters[letter]; });
             return string.toUpperCase();
         }
-
+        
         function search(event) {
             current = this;
             if (current.getAttribute && current.value.length==current.getAttribute("maxlength") && current.nextElementSibling) {
@@ -139,6 +152,49 @@
             }
 
             document.getElementById('suggestions').innerHTML = results;
+        }
+        
+        let isDarkMode = false;
+        let textColor = '';
+        let backgroundColor = '';
+        let letterStyle = '';
+        let transition = 'transition: color .5s, background-color .5s';
+
+
+        function switchTheme() {
+            const darkModeBtn = document.getElementsByTagName('a')[2];
+
+            if (!isDarkMode) {
+                isDarkMode = true;
+                
+                textColor = `color: gray; ${transition}`;
+                backgroundColor = `background-color: #121213; ${transition}`;
+                letterStyle = `border: 2px solid #3a3a3c;background: #121213;color: gray; ${transition}`;
+
+                darkModeBtn.style.cssText += textColor;
+                darkModeBtn.text = 'Light Mode';
+            } else {
+                isDarkMode = false;
+
+                textColor = `color: #333; ${transition}`;
+                backgroundColor = `background-color: #EEEEEE; ${transition}`;
+                letterStyle = `border: 2px solid #3a3a3c;background: #EEEEEE;color: #333; ${transition}`;
+
+                darkModeBtn.style.cssText += textColor;
+                darkModeBtn.text = 'Dark Mode';
+            }
+
+            document.getElementsByTagName('body')[0].style.cssText += backgroundColor;
+            document.getElementsByTagName('h1')[0].style.cssText += textColor;
+            document.getElementsByTagName('a')[0].style.cssText += textColor;
+            document.getElementsByTagName('a')[1].style.cssText += textColor;
+            document.getElementsByTagName('p')[0].style.cssText += textColor;
+
+            document.getElementsByClassName('letter')[0].style.cssText += letterStyle;
+            document.getElementsByClassName('letter')[1].style.cssText += letterStyle;
+            document.getElementsByClassName('letter')[2].style.cssText += letterStyle;
+            document.getElementsByClassName('letter')[3].style.cssText += letterStyle;
+            document.getElementsByClassName('letter')[4].style.cssText += letterStyle;
         }
 
         window.l1 = document.getElementById("l1");
