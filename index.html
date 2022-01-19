@@ -83,7 +83,7 @@
         String.prototype.turkishToUpper = function(){
             var string = this;
             var letters = { "i": "İ", "ş": "Ş", "ğ": "Ğ", "ü": "Ü", "ö": "Ö", "ç": "Ç", "ı": "I" };
-            string = string.replace(/(([iışğüçö]))/g, function(letter){ return letters[letter]; })
+            string = string.replace(/(([iışğüçö]))/g, function(letter){ return letters[letter]; });
             return string.toUpperCase();
         }
 
@@ -99,9 +99,9 @@
             }
 
             if(window.l1.value == '') {
-                l1Val = "(.*)"
+                l1Val = "^(.*)"
             } else {
-                l1Val = window.l1.value;
+                l1Val = '^'+window.l1.value;
             }
 
             if(window.l2.value == '') {
@@ -123,15 +123,16 @@
             }
 
             if(window.l5.value == '') {
-                l5Val = "(.*)"
+                l5Val = "(.*)$"
             } else {
-                l5Val = window.l5.value;
+                l5Val = window.l5.value+'$';
             }
 
             let combined = (l1Val + l2Val + l3Val + l4Val + l5Val).turkishToUpper();
             var re = new RegExp(combined, "i");
+            console.log(re);
 
-            if(re == "/(.*)(.*)(.*)(.*)(.*)/i") {
+            if(re == "/^(.*)(.*)(.*)(.*)(.*)$/i") {
                 var results = ''; 
             } else {
                 const matches = words.filter(value => re.test(value));
