@@ -99,31 +99,31 @@
             }
 
             if(window.l1.value == '') {
-                l1Val = "[A-Z]"
+                l1Val = "(.*)"
             } else {
                 l1Val = window.l1.value;
             }
 
             if(window.l2.value == '') {
-                l2Val = "[A-Z]"
+                l2Val = "(.*)"
             } else {
                 l2Val = window.l2.value;
             }
 
             if(window.l3.value == '') {
-                l3Val = "[A-Z]"
+                l3Val = "(.*)"
             } else {
                 l3Val = window.l3.value;
             }
 
             if(window.l4.value == '') {
-                l4Val = "[A-Z]"
+                l4Val = "(.*)"
             } else {
                 l4Val = window.l4.value;
             }
 
             if(window.l5.value == '') {
-                l5Val = "[A-Z]"
+                l5Val = "(.*)"
             } else {
                 l5Val = window.l5.value;
             }
@@ -131,7 +131,7 @@
             let combined = (l1Val + l2Val + l3Val + l4Val + l5Val).turkishToUpper();
             var re = new RegExp(combined, "i");
 
-            if(re == "/[A-Z][A-Z][A-Z][A-Z][A-Z]/i") {
+            if(re == "/(.*)(.*)(.*)(.*)(.*)/i") {
                 var results = ''; 
             } else {
                 const matches = words.filter(value => re.test(value));
