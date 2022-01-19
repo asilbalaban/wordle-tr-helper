@@ -13,6 +13,14 @@
             font-family: sans-serif;
         }
 
+        h1 {
+            font-size: 22px;
+        }
+
+        nav a {
+            margin-left: 10px;
+        }
+
         .container {
             display: flex;
             justify-content: space-between;
@@ -50,10 +58,13 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <header class="container">
         <h1>Wordle TR Helper</h1>
-        <a href="https://github.com/asilbalaban/wordle-tr-helper" target="_blank">Github</a>
-    </div>
+        <nav>
+            <a href="https://f.github.io/wordle-tr/?utm_source=wordle-tr-helper" target="_blank">Wordle TR</a>
+            <a href="https://github.com/asilbalaban/wordle-tr-helper" target="_blank">Github</a>
+        </nav>
+    </header>
 
     <div class="container">
         <input class="letter" id="l1" type="text" maxlength="1">
