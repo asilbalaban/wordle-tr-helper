@@ -131,7 +131,7 @@
             let combined = (l1Val + l2Val + l3Val + l4Val + l5Val).turkishToUpper();
             var re = new RegExp(combined, "i");
 
-            if(re == "/[A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ]/i") {
+            if((l1Val + l2Val + l3Val + l4Val + l5Val) == "[A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ][A-Za-z_ğüşıöçĞÜŞİÖÇ]") {
                 var results = ''; 
             } else {
                 const matches = words.filter(value => re.test(value));
