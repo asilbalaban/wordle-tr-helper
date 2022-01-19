@@ -36,7 +36,6 @@
         #suggestions {
             line-height: 27px;
             max-width: 600px;
-
         }
 
         @media only screen and (min-width: 992px) {
@@ -118,9 +117,8 @@
                 l5Val = window.l5.value;
             }
 
-            let combined = l1Val + l2Val + l3Val + l4Val + l5Val;
-            let combinedTR = combined.turkishToUpper();
-            var re = new RegExp(combinedTR, "i");
+            let combined = (l1Val + l2Val + l3Val + l4Val + l5Val).turkishToUpper();
+            var re = new RegExp(combined, "i");
 
             if(re == "/[A-Z][A-Z][A-Z][A-Z][A-Z]/i") {
                 var results = ''; 
