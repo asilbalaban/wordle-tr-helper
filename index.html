@@ -122,7 +122,7 @@
             let combinedTR = combined.turkishToUpper();
             var re = new RegExp(combinedTR, "i");
 
-            if(re == "/[A-Z][A-Z][A-Z][A-Z][A-Z]/g") {
+            if(re == "/[A-Z][A-Z][A-Z][A-Z][A-Z]/i") {
                 var results = ''; 
             } else {
                 const matches = words.filter(value => re.test(value));
