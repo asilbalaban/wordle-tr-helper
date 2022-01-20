@@ -99,7 +99,7 @@
         <nav>
             <a href="https://f.github.io/wordle-tr/?utm_source=wordle-tr-helper" target="_blank">Wordle TR</a>
             <a href="https://github.com/asilbalaban/wordle-tr-helper" target="_blank">Github</a>
-            <a id="btn-dark-mode" onclick="switchTheme()">Dark Mode</a>
+            <a id="btn-dark-mode">Dark Mode</a>
         </nav>
     </header>
 
@@ -175,24 +175,23 @@
                 var results = matches.join(', ');
             }
 
-            document.getElementById('suggestions').innerHTML = results;
+            window.suggestions.innerHTML = results;
+        }
+
+        function toggle_dark_mode() {
+            if(window.btnDarkMode.innerHTML == 'Dark Mode') {
+                window.btnDarkMode.innerHTML = 'Light Mode';
+            } else {
+                window.btnDarkMode.innerHTML = 'Dark Mode';
+            }
+
+            document.querySelector('body').classList.toggle('dark-mode');
         }
 
         document.addEventListener("DOMContentLoaded", function(){
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { 
-                document.body.classList.add("dark-mode");
+            if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { 
+                toggle_dark_mode();
             } 
-            
-            btnDarkMode = document.getElementById('btn-dark-mode');
-            btnDarkMode.onclick = function() {
-                if(btnDarkMode.innerHTML == 'Dark Mode') {
-                    btnDarkMode.innerHTML = 'Light Mode';
-                } else {
-                    btnDarkMode.innerHTML = 'Dark Mode';
-                }
-
-                document.querySelector('body').classList.toggle('dark-mode');
-            }
         });
 
         window.l1 = document.getElementById("l1");
@@ -200,12 +199,15 @@
         window.l3 = document.getElementById("l3");
         window.l4 = document.getElementById("l4");
         window.l5 = document.getElementById("l5");
+        window.btnDarkMode = document.getElementById('btn-dark-mode');
+        window.suggestions = document.getElementById('suggestions')
 
         l1.addEventListener('keyup', search, false);
         l2.addEventListener('keyup', search, false);
         l3.addEventListener('keyup', search, false);
         l4.addEventListener('keyup', search, false);
         l5.addEventListener('keyup', search, false);
+        btnDarkMode.addEventListener('click', toggle_dark_mode, false);
     </script>
 </body>
 </html>
