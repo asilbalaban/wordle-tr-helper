@@ -188,11 +188,19 @@
             document.querySelector('body').classList.toggle('dark-mode');
         }
 
-        document.addEventListener("DOMContentLoaded", function(){
+        function is_user_wants_dark_mode() {
             if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { 
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function toggle_dark_mode_onload() {
+            if(is_user_wants_dark_mode() == true) {
                 toggle_dark_mode();
-            } 
-        });
+            }
+        }
 
         window.l1 = document.getElementById("l1");
         window.l2 = document.getElementById("l2");
@@ -208,6 +216,7 @@
         l4.addEventListener('keyup', search, false);
         l5.addEventListener('keyup', search, false);
         btnDarkMode.addEventListener('click', toggle_dark_mode, false);
+        document.addEventListener("DOMContentLoaded", toggle_dark_mode_onload, false);
     </script>
 </body>
 </html>
